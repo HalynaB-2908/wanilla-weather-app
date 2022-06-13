@@ -1,7 +1,10 @@
+/* general elements styling */
 body {
   font-family: Cerebri-Sans, Helvetica, Arial, sans-serif;
   background: #f3f4f5;
 }
+
+
 .weatherApp {
   max-width: 800px;
   margin: 60px auto;
@@ -12,6 +15,7 @@ body {
   color: #878787;
 }
 
+/* seaching engine styling */
 .search-input {
   background: #f3f4f5;
   border: none;
@@ -31,6 +35,78 @@ body {
   height: 50px;
   line-height: 20px;
 }
+
+/* current weather section styling */
 .currentWeather {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.temperature-box {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 1;
+  color: #474747;
+}
+
+.units {
+  font-size: 25px;
+  line-height: 36px;
+  font-weight: 400;
+  position: relative;
+  line-height: 1;
+  top: +4px;
+}
+
+.units a {
+  text-decoration: none;
+  color: #878787;
+}
+
+.units a:hover {
+  text-decoration: underline;
+  color: #878787;
+}
+
+.units-divider {
+  font-size: 15px;
+  line-height: 36px;
+  font-weight: 400;
+  position: relative;
+  line-height: 1;
+  top: -4px;
+}
+
+p {
+  font-style: italic;
+  text-align: center;
+  font-size: 20px;
+}
+
+.weather-details {
+  list-style: none;
+  padding: 0;
+  font-style: italic;
+}
+
+.city-date-box h1 {
+  margin: 0;
+  color: #474747;
+}
+
+/* author details section styling */
+.authors {
+  font-size: 15px;
+  padding: 0 45px;
+  position: fixed;
+  bottom: 10px;
+  color: #878787;
 }
