@@ -1,0 +1,36 @@
+body {
+  font-family: Cerebri-Sans, Helvetica, Arial, sans-serif;
+  background: #f3f4f5;
+}
+.weatherApp {
+  max-width: 800px;
+  margin: 60px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 30px 50px rgb(65 50 100 / 8%);
+  padding: 40px;
+  color: #878787;
+}
+
+.search-input {
+  background: #f3f4f5;
+  border: none;
+  padding: 15px 20px;
+  display: inline-block;
+  border-radius: 6px;
+  color: rgba(39, 33, 66, 0.4);
+  font-size: 16px;
+  height: 50px;
+  line-height: 20px;
+}
+
+.search-button {
+  display: inline-block;
+  border-radius: 6px;
+  font-size: 16px;
+  height: 50px;
+  line-height: 20px;
+}
+.currentWeather {
+  margin-top: 20px;
+}
