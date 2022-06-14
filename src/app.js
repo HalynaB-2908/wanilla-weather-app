@@ -8,34 +8,19 @@ let form = document.querySelector("#search-form");
 
 let displayedCity = document.querySelector("#currentCity");
 
-function displayTemperature(response) {
-  console.log(response.data);
-  let temperatureData = Math.round(response.data.main.temp);
-  let descriptionData = response.data.weather[0].description;
-  let humidityData = response.data.main.humidity;
-  let windData = response.data.wind.speed;
-  let temperature = document.querySelector("#temperatureValue");
-  let description = document.querySelector("#weatherDescriptionValue");
-  let humidity = document.querySelector("#humidityValue");
-  let wind = document.querySelector("#windSpeedValue");
-  temperature.innerHTML = `${temperatureData}`;
-  description.innerHTML = `${descriptionData}`;
-  humidity.innerHTML = `${humidityData}`;
-  wind.innerHTML = `${windData}`;
-}
+function displayDate(timestamp) {
+  let today = new Date(timestamp);
 
-function searchWeather(event) {
-  event.preventDefault();
-  let searchedCity = document.querySelector("#cityInput");
-  displayedCity.innerHTML = `${searchedCity.value}`;
-  let url = `${sourceApi}q=${searchedCity.value}&appid=${apiKey}&&units=${units}`;
-  axios.get(url).then(displayTemperature);
-}
-form.addEventListener("submit", searchWeather);
-// date and time section
-let today = new Date();
+  let hours = today.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
 
-function displayDayOfTheWeek() {
+  let minutes = today.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
   let days = [
     "Sunday",
     "Monday",
@@ -47,28 +32,35 @@ function displayDayOfTheWeek() {
   ];
 
   let day = days[today.getDay()];
-
-  let currentDay = document.querySelector("#dayOfTheWeek");
-
-  currentDay.innerHTML = `${day}`;
+  return `${day} ${hours}:${minutes}`;
 }
 
-displayDayOfTheWeek();
-
-function displayTime() {
-  let hours = today.getHours();
-
-  let minutes = today.getMinutes();
-
-  let currentTime = document.querySelector("#time");
-
-  if (hours < 10) {
-    currentTime.innerHTML = `0${hours}:${minutes}`;
-  } else if (minutes < 10) {
-    currentTime.innerHTML = `${hours}:0${minutes}`;
-  } else {
-    currentTime.innerHTML = `${hours}:${minutes}`;
-  }
+function displayTemperature(response) {
+  let temperature = document.querySelector("#temperatureValue");
+  let description = document.querySelector("#weatherDescriptionValue");
+  let humidity = document.querySelector("#humidityValue");
+  let wind = document.querySelector("#windSpeedValue");
+  let dateTime = document.querySelector("#dayTime");
+  let icon = document.querySelector("#icon");
+  temperature.innerHTML = `${Math.round(response.data.main.temp)}`;
+  description.innerHTML = `${response.data.weather[0].description}`;
+  humidity.innerHTML = `${response.data.main.humidity}`;
+  wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
+  dateTime.innerHTML = displayDate(response.data.dt * 1000);
+  icon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  icon.setAttribute("alt", response.data.weather[0].description);
 }
 
-displayTime();
+function searchWeather(event) {
+  event.preventDefault();
+  let searchedCity = document.querySelector("#cityInput");
+  displayedCity.innerHTML = `${searchedCity.value}`;
+  let url = `${sourceApi}q=${searchedCity.value}&appid=${apiKey}&&units=${units}`;
+  axios.get(url).then(displayTemperature);
+  searchedCity.value = "";
+}
+
+form.addEventListener("submit", searchWeather);
