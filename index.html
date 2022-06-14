@@ -41,20 +41,21 @@
         <!-- current weather section -->
         <div class="currentWeather">
           <div class="row">
-            <div class="col-4">
+            <div class="col-5">
               <div class="temperature-box">
                 <img src="" id="icon"/>
                 <span id="temperatureValue">20</span>
                 <span class="units">
-                  <a href="#">°C</a>
+                  <a href="#" id="celsiusLink" class="active">°C</a>
                   <span class="units-divider">|</span>
-                  <a href="#">°F</a>
+                  <a href="#" id="fahrenheitLink">°F</a>
                 </span>
               </div>
-              <p class="weather-description" id="weatherDescriptionValue">partly cloudy</p>
+              
             </div>
-            <div class="col-5">
+            <div class="col-4">
               <ul class="weather-details">
+                <li class="weather-description" id="weatherDescriptionValue"></li>
                 <li>Humidity: <span id="humidityValue"></span>%</li>
                 <li>Wind: <span id="windSpeedValue"></span> km/h</li>
               </ul>
