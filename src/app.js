@@ -6,6 +6,32 @@ let units = "metric";
 
 let form = document.querySelector("#search-form");
 
+let displayedCity = document.querySelector("#currentCity");
+
+function displayTemperature(response) {
+  console.log(response.data);
+  let temperatureData = Math.round(response.data.main.temp);
+  let descriptionData = response.data.weather[0].description;
+  let humidityData = response.data.main.humidity;
+  let windData = response.data.wind.speed;
+  let temperature = document.querySelector("#temperatureValue");
+  let description = document.querySelector("#weatherDescriptionValue");
+  let humidity = document.querySelector("#humidityValue");
+  let wind = document.querySelector("#windSpeedValue");
+  temperature.innerHTML = `${temperatureData}`;
+  description.innerHTML = `${descriptionData}`;
+  humidity.innerHTML = `${humidityData}`;
+  wind.innerHTML = `${windData}`;
+}
+
+function searchWeather(event) {
+  event.preventDefault();
+  let searchedCity = document.querySelector("#cityInput");
+  displayedCity.innerHTML = `${searchedCity.value}`;
+  let url = `${sourceApi}q=${searchedCity.value}&appid=${apiKey}&&units=${units}`;
+  axios.get(url).then(displayTemperature);
+}
+form.addEventListener("submit", searchWeather);
 // date and time section
 let today = new Date();
 

@@ -25,6 +25,7 @@
             <input
               type="search"
               class="form-control search-input"
+              id="cityInput"
               placeholder="Enter a city..."
             />
           </div>
@@ -43,23 +44,23 @@
             <div class="col-4">
               <div class="temperature-box">
                 <img src="img/sun.png" />
-                20°
+                <span id="temperatureValue">20</span>°
                 <span class="units">
                   <a href="#">C</a>
                   <span class="units-divider">|</span>
                   <a href="#">F</a>
                 </span>
               </div>
-              <p class="weather-description">partly cloudy</p>
+              <p class="weather-description" id="weatherDescriptionValue">partly cloudy</p>
             </div>
             <div class="col-5">
               <ul class="weather-details">
-                <li>Humidity: 40%</li>
-                <li>Wind: 8.26km/h</li>
+                <li>Humidity: <span id="humidityValue"></span>%</li>
+                <li>Wind: <span id="windSpeedValue"></span>km/h</li>
               </ul>
             </div>
             <div class="col-3 city-date-box">
-              <h1>Herborn</h1>
+              <h1 id="currentCity">Herborn</h1>
               <p>
                 <span id="dayOfTheWeek"> </span>
                 <span id="time"></span></p>
