@@ -4,10 +4,13 @@ body {
   background: #f3f4f5;
 }
 
-
+.container {
+  max-width: 800px;
+}
 .weatherApp {
   max-width: 800px;
   margin: 60px auto;
+  margin-bottom: 0;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 30px 50px rgb(65 50 100 / 8%);
@@ -118,10 +121,8 @@ p {
 } */
 
 /* author details section styling */
-.authors {
-  font-size: 15px;
-  padding: 0 45px;
-  position: fixed;
-  bottom: 10px;
+.author {
+  font-size: 12px;
+  padding: 0 10px;
   color: #878787;
 }

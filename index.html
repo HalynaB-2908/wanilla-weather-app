@@ -13,37 +13,36 @@
     />
     <link rel="stylesheet" href="src/style.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-   
   </head>
   <body>
     <div class="container">
       <div class="weatherApp">
         <!-- seaching engine -->
         <form id="search-form">
-        <div class="row">
-          <div class="col-9">
-            <input
-              type="search"
-              class="form-control search-input"
-              id="cityInput"
-              placeholder="Enter a city..."
-            />
+          <div class="row">
+            <div class="col-9">
+              <input
+                type="search"
+                class="form-control search-input"
+                id="cityInput"
+                placeholder="Enter a city..."
+              />
+            </div>
+            <div class="col-3">
+              <input
+                type="submit"
+                value="Search"
+                class="btn btn-primary w-100 search-button"
+              />
+            </div>
           </div>
-          <div class="col-3">
-            <input
-              type="submit"
-              value="Search"
-              class="btn btn-primary w-100 search-button"
-            />
-          </div>
-        </div>
         </form>
         <!-- current weather section -->
         <div class="currentWeather">
           <div class="row">
             <div class="col-5">
               <div class="temperature-box">
-                <img src="" id="icon"/>
+                <img src="http://openweathermap.org/img/wn/01d@2x.png" id="icon" />
                 <span id="temperatureValue">20</span>
                 <span class="units">
                   <a href="#" id="celsiusLink" class="active">°C</a>
@@ -51,20 +50,20 @@
                   <a href="#" id="fahrenheitLink">°F</a>
                 </span>
               </div>
-              
             </div>
             <div class="col-4">
               <ul class="weather-details">
-                <li class="weather-description" id="weatherDescriptionValue"></li>
-                <li>Humidity: <span id="humidityValue"></span>%</li>
-                <li>Wind: <span id="windSpeedValue"></span> km/h</li>
+                <li
+                  class="weather-description"
+                  id="weatherDescriptionValue"
+                >Clear sky</li>
+                <li>Humidity: <span id="humidityValue">20</span>%</li>
+                <li>Wind: <span id="windSpeedValue">1</span> km/h</li>
               </ul>
             </div>
             <div class="col-3 city-date-box">
               <h1 id="currentCity">Herborn</h1>
-              <p id="dayTime">
-                Monday 17:50
-                </p>
+              <p id="dayTime">Monday 17:50</p>
             </div>
           </div>
         </div>
@@ -81,14 +80,12 @@
           </div>
         </div> -->
       </div>
+      <div class="author">
+        <a href="https://github.com/HalynaB-2908/wanilla-weather-app" target="_blank" title="sun icons">
+          Open-source code</a>
+        <span>by Halyna Biedarieva</span>
+      </div>
     </div>
-    <!-- author details section -->
-    <a
-      class="authors"
-      href="https://www.flaticon.com/free-icons/sun"
-      title="sun icons"
-      >Sun icons created by Freepik - Flaticon</a
-    >
-     <script src="src/app.js"></script>
+    <script src="src/app.js"></script>
   </body>
 </html>
