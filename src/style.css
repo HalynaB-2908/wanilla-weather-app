@@ -115,10 +115,12 @@ p {
 
 
 /* weather forecast section styling */
-/* .weather-forecast {
-  margin-top: 40px;
+.weather-forecast {
+  margin: 0;
+  margin-top: 60px;
   text-align: center;
-} */
+  padding: 0;
+}
 
 /* author details section styling */
 .author {
