@@ -37,6 +37,29 @@ function displayDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastContainer = document.querySelector("#forecastContainer");
+  let forecastHTMLTemplate = "";
+  let days = [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
+  days.forEach(day => {
+    forecastHTMLTemplate =
+      forecastHTMLTemplate +
+      ` <div class="col-2 forecastItem">
+              ${day}
+              <img src="http://openweathermap.org/img/wn/02d@2x.png" />
+              20° 15°
+            </div>`;
+  })
+  forecastContainer.innerHTML = forecastHTMLTemplate;
+}
+
 function displayTemperature(response) {
   let temperature = document.querySelector("#temperatureValue");
   let description = document.querySelector("#weatherDescriptionValue");
@@ -88,3 +111,5 @@ function temperatureToCelsium(event) {
 }
 let celsiusLink = document.querySelector("#celsiusLink"); 
 celsiusLink.addEventListener("click", temperatureToCelsium);
+
+displayForecast();
