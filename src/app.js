@@ -37,27 +37,38 @@ function displayDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  function displayDay(timestamp) {
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let today = new Date(timestamp);
+    let day = days[today.getDay()];
+    return `${day}`;
+  }
   let forecastContainer = document.querySelector("#forecastContainer");
   let forecastHTMLTemplate = "";
-  let days = [
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-  ];
-  days.forEach(day => {
+
+  let forecastArray = response.data.daily;
+  forecastArray.length = 6;
+  forecastArray.forEach((item) => {
     forecastHTMLTemplate =
       forecastHTMLTemplate +
       ` <div class="col-2 forecastItem">
-              ${day}
-              <img src="http://openweathermap.org/img/wn/02d@2x.png" />
-              20° 15°
+              <span class="day-week">${displayDay(item.dt * 1000)}</span>
+              <img src="http://openweathermap.org/img/wn/${
+                item.weather[0].icon
+              }@2x.png" />
+              <span class="max-temperature">${Math.round(item.temp.max)}°</span>
+              <span class="min-temperature">${Math.round(
+                item.temp.min
+              )}°</span>  
             </div>`;
-  })
+  });
   forecastContainer.innerHTML = forecastHTMLTemplate;
+}
+
+function getForecast(coordinates) {
+  let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&&units=${units}`;
+  axios.get(url).then(displayForecast);
 }
 
 function displayTemperature(response) {
@@ -78,6 +89,7 @@ function displayTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.weather[0].description);
+  getForecast(response.data.coord);
 }
 
 function searchWeather(event) {
@@ -106,10 +118,8 @@ function temperatureToCelsium(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temperatureValue");
   temperature.innerHTML = Math.round(celsiusTemperature);
-   celsiusLink.classList.add("active");
-   fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
 }
-let celsiusLink = document.querySelector("#celsiusLink"); 
+let celsiusLink = document.querySelector("#celsiusLink");
 celsiusLink.addEventListener("click", temperatureToCelsium);
-
-displayForecast();

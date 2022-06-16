@@ -124,6 +124,9 @@ p {
   text-align: center;
 }
 
+.max-temperature {
+  color: #292929;
+}
 /* author details section styling */
 .author {
   font-size: 12px;
