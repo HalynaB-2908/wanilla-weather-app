@@ -39,7 +39,7 @@ function displayDate(timestamp) {
 
 function displayForecast(response) {
   function displayDay(timestamp) {
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let days = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let today = new Date(timestamp);
     let day = days[today.getDay()];
     return `${day}`;
@@ -58,9 +58,7 @@ function displayForecast(response) {
                 item.weather[0].icon
               }@2x.png" />
               <span class="max-temperature">${Math.round(item.temp.max)}°</span>
-              <span class="min-temperature">${Math.round(
-                item.temp.min
-              )}°</span>  
+              <span class="min-temperature">${Math.round(item.temp.min)}°</span>  
             </div>`;
   });
   forecastContainer.innerHTML = forecastHTMLTemplate;
