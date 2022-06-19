@@ -72,6 +72,7 @@ function getForecast(coordinates) {
 }
 
 function displayTemperature(response) {
+  console.log(response.data.sys.sunrise);
   let temperature = document.querySelector("#temperatureValue");
   let description = document.querySelector("#weatherDescriptionValue");
   let humidity = document.querySelector("#humidityValue");
@@ -105,20 +106,18 @@ form.addEventListener("submit", searchWeather);
 
 function connectNavigator() {
   function showCurrentLocationWeather(response) {
-    console.log(response);
+    console.log(response.data.sys.sunrise);
     let currentTemperature = Math.round(response.data.main.temp);
     let temperature = document.querySelector("#temperatureValue");
     temperature.innerHTML = `${currentTemperature}`;
     let weatherDescription = document.querySelector("#weatherDescriptionValue");
     let descriptionData = response.data.weather[0].description;
-    console.log(descriptionData);
     weatherDescription.innerHTML = descriptionData;
     currentCity.innerHTML = `${response.data.name}`;
     getForecast(response.data.coord);
   }
 
   function showPosition(position) {
-    console.log(position);
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let url = `${sourceApi}lat=${latitude}&lon=${longitude}&appid=${apiKey}&&units=${units}`;
