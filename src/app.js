@@ -48,8 +48,9 @@ function displayForecast(response) {
   let forecastHTMLTemplate = "";
 
   let forecastArray = response.data.daily;
-  forecastArray.length = 6;
-  forecastArray.forEach((item) => {
+  // forecastArray.length = 6;
+  forecastArray.forEach((item, index) => {
+    if(index < 6) {
     forecastHTMLTemplate =
       forecastHTMLTemplate +
       ` <div class="col-2 forecastItem">
@@ -60,6 +61,7 @@ function displayForecast(response) {
               <span class="max-temperature">${Math.round(item.temp.max)}°</span>
               <span class="min-temperature">${Math.round(item.temp.min)}°</span>  
             </div>`;
+  }
   });
   forecastContainer.innerHTML = forecastHTMLTemplate;
 }
@@ -81,6 +83,7 @@ function displayTemperature(response) {
   description.innerHTML = `${response.data.weather[0].description}`;
   humidity.innerHTML = `${response.data.main.humidity}`;
   wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
+  displayedCity.innerHTML = `${response.data.name}`;
   dateTime.innerHTML = displayDate(response.data.dt * 1000);
   icon.setAttribute(
     "src",
@@ -93,7 +96,6 @@ function displayTemperature(response) {
 function searchWeather(event) {
   event.preventDefault();
   let searchedCity = document.querySelector("#cityInput");
-  displayedCity.innerHTML = `${searchedCity.value}`;
   let url = `${sourceApi}q=${searchedCity.value}&appid=${apiKey}&&units=${units}`;
   axios.get(url).then(displayTemperature);
   searchedCity.value = "";
@@ -101,23 +103,28 @@ function searchWeather(event) {
 
 form.addEventListener("submit", searchWeather);
 
-function temperatureToFahrenheit(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  let temperature = document.querySelector("#temperatureValue");
-  temperature.innerHTML = Math.round(fahrenheitTemperature);
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-}
-let fahrenheitLink = document.querySelector("#fahrenheitLink");
-fahrenheitLink.addEventListener("click", temperatureToFahrenheit);
+function connectNavigator() {
+  function showCurrentLocationWeather(response) {
+    console.log(response);
+    let currentTemperature = Math.round(response.data.main.temp);
+    let temperature = document.querySelector("#temperatureValue");
+    temperature.innerHTML = `${currentTemperature}`;
+    let weatherDescription = document.querySelector("#weatherDescriptionValue");
+    let descriptionData = response.data.weather[0].description;
+    console.log(descriptionData);
+    weatherDescription.innerHTML = descriptionData;
+    currentCity.innerHTML = `${response.data.name}`;
+    getForecast(response.data.coord);
+  }
 
-function temperatureToCelsium(event) {
-  event.preventDefault();
-  let temperature = document.querySelector("#temperatureValue");
-  temperature.innerHTML = Math.round(celsiusTemperature);
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
+  function showPosition(position) {
+    console.log(position);
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    let url = `${sourceApi}lat=${latitude}&lon=${longitude}&appid=${apiKey}&&units=${units}`;
+    axios.get(url).then(showCurrentLocationWeather);
+  }
+  navigator.geolocation.getCurrentPosition(showPosition);
 }
-let celsiusLink = document.querySelector("#celsiusLink");
-celsiusLink.addEventListener("click", temperatureToCelsium);
+
+connectNavigator();
